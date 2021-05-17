@@ -40,30 +40,10 @@ end
 
 %% Maximum temperature heat pain stimulus
 % Push the button to deliver heat stimulus
-while true
-    if expt_param.dofmri
-        [~,~,keyCode] = KbCheck(apple);
-    else
-        [~,~,keyCode] = KbCheck(-1);
-    end
-
-    if keyCode(KbName('q')) == 1
-        abort_experiment('manual');
-        break
-    end
-
-    msgtxt = ['실험자는 \n\n 최고온도 열자극을 전달하려면 \n\n space 을 눌러주시기 바랍니다. \n\n (q : 화면 끄기)'];
-    msgtxt = double(msgtxt); % korean to double
-    DrawFormattedText(theWindow, msgtxt, 'center', 'center', white, [], [], [], 2);
-    Screen('Flip', theWindow); 
-    
-    
-    if keyCode(KbName('space')) == 1
-        break;
-    elseif keyCode(KbName('q')) == 1
-        abort_experiment('manual');
-        break
-    end
+if expt_param.dofmri
+    [~,~,keyCode] = KbCheck(apple);
+else
+    [~,~,keyCode] = KbCheck(-1);
 end
 
 
@@ -72,6 +52,30 @@ PathPrg = load_PathProgram('HBM2021');
 
 MaxHeat.program = PathPrg{45,4}; % 48 degree [48 '01000110' 'MPC_48' 70]
 MaxHeat.intensity = 48;
+
+
+while true
+    if keyCode(KbName('q')) == 1
+        abort_experiment('manual');
+        break
+    end
+
+    msgtxt = ['실험자는 \n\n 최고온도 열자극을 전달하려면 \n\n m 을 눌러주시기 바랍니다. \n\n (q : 화면 끄기)'];
+    msgtxt = double(msgtxt); % korean to double
+    DrawFormattedText(theWindow, msgtxt, 'center', 'center', white, [], [], [], 2);
+    Screen('Flip', theWindow); 
+    
+    
+    if keyCode(KbName('m')) == 1
+        break;
+    elseif keyCode(KbName('q')) == 1
+        abort_experiment('manual');
+        break
+    end
+end
+
+
+
 
 %-------------Setting Pathway------------------
 if expt_param.pathway
@@ -95,7 +99,7 @@ if expt_param.pathway
     main(ip,port,2);        
 else
     Screen(theWindow, 'FillRect', bgcolor, window_rect);
-    DrawFormattedText(theWindow, MaxHeat.intensity, 'center', 'center', white, [], [], [], 1.2);
+    DrawFormattedText(theWindow, double(num2str(MaxHeat.intensity)), 'center', 'center', white, [], [], [], 1.2);
     Screen('Flip', theWindow); 
 end
 WaitSecs(13);

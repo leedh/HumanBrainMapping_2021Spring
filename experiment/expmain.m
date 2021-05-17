@@ -9,7 +9,7 @@ addpath(genpath(pwd));
 
 basedir = pwd;
 
-expt_param.screen_mode = 'Test'; %{'Test','Full'}
+expt_param.screen_mode = 'Full'; %{'Test','Full'}
 
 expt_param.run_name = 'run';
 expt_param.run_num = 01;
@@ -18,7 +18,10 @@ expt_param.pathway = false;
 expt_param.dofmri = false;
 
 %% Experiment parameter
+whichScreen = 1; % you can check the screen number by running Screen('Screens')
+
 expt_param.cue_types = ["HighCue", "LowCue"];
+expt_param.cue_shapes = ["△", "☐"];
 
 LowPain = 40.8; MidPain = 45; HighPain = 49.2;
 expt_param.heat_intensity_table = [LowPain, MidPain, HighPain]; % stimulus intensity
@@ -37,7 +40,7 @@ data = data_save(expt_param, basedir);
 data.expt_param = expt_param;
 %data.dat.experiment_start_time = GetSecs; %이걸 왜 또하지 data_save()에서 했는데
 
-screen_param = setscreen(expt_param);
+screen_param = setscreen(expt_param, whichScreen);
 
 explain(screen_param);
   

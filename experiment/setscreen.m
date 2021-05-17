@@ -1,7 +1,7 @@
-function screen_param = setscreen(expt_param)
+function screen_param = setscreen(expt_param, whichScreen)
 
     screens = Screen('Screens');
-    window_num = screens(1);
+    window_num = screens(whichScreen);
     Screen('Preference', 'SkipSyncTests', 1); % when a monitor isn't that good.. ex. LCD
     window_info = Screen('Resolution', window_num);
     

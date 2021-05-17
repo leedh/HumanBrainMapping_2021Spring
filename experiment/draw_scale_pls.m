@@ -29,12 +29,14 @@ rb = rb2;
 %% Drawing scale
 switch scale
     case 'belief_int'  % one-directional
-        start_center = false;
+        %start_center = false;
         Screen('DrawLine', theWindow, white, lb, H*(1/2), rb, H*(1/2), 4); % penWidth: 0.125~7.000
         Screen('DrawLine', theWindow, white, lb, H*(1/2)-scale_H/3, lb, H*(1/2)+scale_H/3, 6);
-        DrawFormattedText(theWindow, double('전혀\n신뢰\n안함'), lb-scale_H/2, H*(1/2)+scale_H/1.2, white,[],[],[],1.2);
+        DrawFormattedText(theWindow, double('0%'), lb-scale_H/2, H*(1/2)+scale_H/1.2, white,[],[],[],1.2);
+        Screen('DrawLine', theWindow, white, W/2, H*(1/2)-scale_H/3, W/2, H*(1/2)+scale_H/3, 6);
+        DrawFormattedText(theWindow, double('50%'), W/2-scale_H/2, H*(1/2)+scale_H/1.2, white,[],[],[],1.2);
         Screen('DrawLine', theWindow, white, rb, H*(1/2)-scale_H/3, rb, H*(1/2)+scale_H/3, 6);
-        DrawFormattedText(theWindow, double('완전\n신뢰'), rb-scale_H/0.7, H*(1/2)+scale_H/1.2, white,[],[],[],1.2);
+        DrawFormattedText(theWindow, double('100%'), rb-scale_H/2, H*(1/2)+scale_H/1.2, white,[],[],[],1.2);
        
     case 'cont_glms'
         lb = lb1; % rating scale left bounds 1/6

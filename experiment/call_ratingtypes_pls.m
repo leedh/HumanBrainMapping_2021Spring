@@ -25,7 +25,7 @@ switch type
             {'overall_int'};
     case 'belief'
         temp_rating_types_pls = {
-            'belief_int', '현재 Cue를 얼마나 신뢰하시나요?';...
+            'belief_int', '아래의 관계를 얼마나 신뢰하시나요?';...
             };
         
         rating_types_pls.alltypes = temp_rating_types_pls(:,1);

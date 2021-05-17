@@ -105,6 +105,9 @@ data.dat.belief_rating_starttime(trial_num) = start_t;
 
 ratetype = strcmp(rating_types_pls.alltypes, scale);
 
+cue_shapes = expt_param.cue_shapes;
+shape_tstring=char((strcat(cue_shapes(1),": 강한 열자극","\n",cue_shapes(2),": 약한 열자극")));
+
 % Initial mouse position
 if start_center
     SetMouse(W/2,H/2); % set mouse at the center
@@ -117,6 +120,9 @@ while true
     [x,~,button] = GetMouse(theWindow);
     [lb, rb, start_center] = draw_scale_pls(scale, screen_param.window_info, screen_param.line_parameters, screen_param.color_values);
     if x < lb; x = lb; elseif x > rb; x = rb; end
+    
+    
+    DrawFormattedText(theWindow, double(shape_tstring), 'center', H*(3/10), white,[],[],[],2); % match relationship
     
     DrawFormattedText(theWindow, double(rating_types_pls.prompts{ratetype}), 'center', H*(1/4), white, [], [], [], 2);
     Screen('DrawLine', theWindow, orange, x, H*(1/2)-scale_H/3, x, H*(1/2)+scale_H/3, 6); %rating bar
@@ -161,13 +167,13 @@ switch shuffled_cue
     case "HighCue"
         Screen(theWindow, 'FillRect', bgcolor, window_rect);
         Screen('TextSize', theWindow, 60);
-        DrawFormattedText(theWindow, double('△'), 'center', 'center', white, [], [], [], 1.2);
+        DrawFormattedText(theWindow, double(char(expt_param.cue_shapes(1))), 'center', 'center', white, [], [], [], 1.2);
         Screen('Flip', theWindow);
         Screen('TextSize', theWindow, fontsize);
     case "LowCue"
         Screen(theWindow, 'FillRect', bgcolor, window_rect);
         Screen('TextSize', theWindow, 60);
-        DrawFormattedText(theWindow, double('☐'), 'center', 'center', white, [], [], [], 1.2);
+        DrawFormattedText(theWindow, double(char(expt_param.cue_shapes(2))), 'center', 'center', white, [], [], [], 1.2);
         Screen('Flip', theWindow);
         Screen('TextSize', theWindow, fontsize);
 end

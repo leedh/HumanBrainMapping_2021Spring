@@ -144,14 +144,17 @@ for i = 1:condition_nums
     end
 end
 
+
+
 % creat cue type list
 if ~(cue_types(1) == "HighCue" || cue_types(2) == "LowCue")
     error('Value error : "cue_types" is wrong. Please check!')
 end
 
-High_Certainty = [repmat(cue_types(1),1,8) repmat(cue_types(2),1,2)];
-Middle_Certainty = [repmat(cue_types(1),1,5) repmat(cue_types(2),1,5)];
-Low_Certainty = [repmat(cue_types(1),1,2) repmat(cue_types(2),1,8)];
+% 
+% High_Certainty = [repmat(cue_types(1),1,8) repmat(cue_types(2),1,2)];
+% Middle_Certainty = [repmat(cue_types(1),1,5) repmat(cue_types(2),1,5)];
+% Low_Certainty = [repmat(cue_types(1),1,2) repmat(cue_types(2),1,8)];
 
 condition_list = ["High_Certainty" "Middle_Certainty" "Low_Certainty"];
 switch run_type
@@ -169,10 +172,88 @@ arr = 1:condition_nums;
 sample_index = datasample(arr, length(arr), 'Replace',false);
 condition_list = condition_list(sample_index);
 
-cue_list = [];
+
+
+cue_list = strings(1,trial_nums);
 for i=1:condition_nums
-    exp_tmp = ['[','cue_list',' ', sprintf('%s',condition_list(i)),']'];
-    cue_list = eval(exp_tmp);
+    heat_program_condition = heat_program_table((i-1)*10+1:i*10);
+    cue_list_condition = cue_list((i-1)*10+1:i*10);
+    
+    switch condition_list(i)
+        case "High_Certainty"
+            for j=1:numel(heat_program_condition)
+                if j == 1
+                    cue_list_condition(j) = "HighCue";
+                elseif j == 2
+                    cue_list_condition(j) = "LowCue";
+                else
+                    rng('shuffle')
+                    prob=rand();
+                    if prob >= 0.2 % match 80%
+                        if heat_program_condition(j) == HighPain
+                            cue_list_condition(j) = "HighCue";
+                        else
+                            cue_list_condition(j) = "LowCue";
+                        end
+                    else % mismatch 20%
+                        if heat_program_condition(j) == HighPain
+                            cue_list_condition(j) = "LowCue";
+                        else
+                            cue_list_condition(j) = "HighCue";
+                        end
+                    end
+                end
+            end
+        case "Middle_Certainty"
+            for j=1:numel(heat_program_condition)
+                if j == 1
+                    cue_list_condition(j) = "HighCue";
+                elseif j == 2
+                    cue_list_condition(j) = "LowCue";
+                else
+                    rng('shuffle')
+                    prob=rand();
+                    if prob >= 0.5 % match 50%
+                        if heat_program_condition(j) == HighPain
+                            cue_list_condition(j) = "HighCue";
+                        else
+                            cue_list_condition(j) = "LowCue";
+                        end
+                    else % mismatch 50%
+                        if heat_program_condition(j) == HighPain
+                            cue_list_condition(j) = "LowCue";
+                        else
+                            cue_list_condition(j) = "HighCue";
+                        end
+                    end
+                end
+            end
+        case "Low_Certainty"
+            for j=1:numel(heat_program_condition)
+                if j == 1
+                    cue_list_condition(j) = "HighCue";
+                elseif j == 2
+                    cue_list_condition(j) = "LowCue";
+                else
+                    rng('shuffle')
+                    prob=rand();
+                    if prob >= 0.8 % match 20%
+                        if heat_program_condition(j) == HighPain
+                            cue_list_condition(j) = "HighCue";
+                        else
+                            cue_list_condition(j) = "LowCue";
+                        end
+                    else % mismatch 80%
+                        if heat_program_condition(j) == HighPain
+                            cue_list_condition(j) = "LowCue";
+                        else
+                            cue_list_condition(j) = "HighCue";
+                        end
+                    end
+                end
+            end
+    end
+    cue_list((i-1)*10+1:i*10) = cue_list_condition;
 end
 
 

@@ -40,21 +40,15 @@ end
 
 %% Maximum temperature heat pain stimulus
 % Push the button to deliver heat stimulus
-if expt_param.dofmri
-    [~,~,keyCode] = KbCheck(apple);
-else
-    [~,~,keyCode] = KbCheck(-1);
-end
-
-
-% Making pathway program list
-PathPrg = load_PathProgram('HBM2021');
-
-MaxHeat.program = PathPrg{45,4}; % 48 degree [48 '01000110' 'MPC_48' 70]
-MaxHeat.intensity = 48;
 
 
 while true
+    if expt_param.dofmri
+        [~,~,keyCode] = KbCheck(apple);
+    else
+        [~,~,keyCode] = KbCheck(-1);
+    end
+    
     if keyCode(KbName('q')) == 1
         abort_experiment('manual');
         break
@@ -74,6 +68,12 @@ while true
     end
 end
 
+
+% Making pathway program list
+PathPrg = load_PathProgram('HBM2021');
+
+MaxHeat.program = PathPrg{45,4}; % 48 degree [48 '01000110' 'MPC_48' 70]
+MaxHeat.intensity = 48;
 
 
 

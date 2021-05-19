@@ -7,9 +7,9 @@ function screen_param = setscreen(expt_param)
     
     switch expt_param.screen_mode
         case 'Full'
-            %window_rect = [0 0 window_info.width window_info.height]; % full screen
+            window_rect = [0 0 window_info.width window_info.height]; % full screen
             %window_rect = [0 0 1440 900]; % full screen
-            window_rect = [0 0 window_info.width/2 window_info.height/2]; % full screen
+            %window_rect = [0 0 window_info.width/2 window_info.height/2]; % full screen
             fontsize = 32;
             HideCursor;
         case 'Test'

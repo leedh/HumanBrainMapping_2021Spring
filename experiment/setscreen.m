@@ -1,7 +1,7 @@
-function screen_param = setscreen(expt_param, whichScreen)
+function screen_param = setscreen(expt_param)
 
     screens = Screen('Screens');
-    window_num = screens(whichScreen);
+    window_num = screens(end);
     Screen('Preference', 'SkipSyncTests', 1); % when a monitor isn't that good.. ex. LCD
     window_info = Screen('Resolution', window_num);
     
@@ -11,6 +11,7 @@ function screen_param = setscreen(expt_param, whichScreen)
             %window_rect = [0 0 1440 900]; % full screen
             window_rect = [0 0 window_info.width/2 window_info.height/2]; % full screen
             fontsize = 32;
+            HideCursor;
         case 'Test'
             window_rect = [0 0 600 300];  % 1920 1080; full screen for window
             fontsize = 20;
@@ -51,7 +52,7 @@ function screen_param = setscreen(expt_param, whichScreen)
     
     Screen(theWindow, 'FillRect', bgcolor, window_rect);
     Screen('Flip', theWindow);
-    %HideCursor;
+    
     
     %Making dictionary for return variables
     screen_param.window_info = struct('W',W, 'H',H, 'window_num',window_num, 'window_rect',window_rect, 'theWindow',theWindow, 'fontsize',fontsize, 'font',font);

@@ -48,11 +48,11 @@ iti = 2;
 
 wait_after_iti = iti; % iti: 2 sec
 wait_after_first_jitter = first_jitter(jitter_index); % 1st jitter: 1,2,3 sec
-wait_after_belief_rating = wait_after_first_jitter + 5; % belief rating: 5 sec
-wait_after_cue = wait_after_belief_rating + 1; % cue: 1 sec
-wait_after_stimulus = wait_after_cue + 12; % stimulus: 12 sec(?)
+wait_after_belief_rating = wait_after_first_jitter + 4.5; % belief rating: 4.5 sec
+wait_after_cue = wait_after_belief_rating + 2; % cue: 2 sec
+wait_after_stimulus = wait_after_cue + 8; % stimulus: 8 sec
 wait_after_jitter = wait_after_stimulus + second_jitter(jitter_index); % 2nd jitter: 1,2,3, sec
-wait_after_heat_rating = wait_after_jitter + 5; % heat rating: 5 sec
+wait_after_heat_rating = wait_after_jitter + 4.5; % heat rating: 4.5 sec
 total_trial_time = wait_after_heat_rating + 3;
 
 

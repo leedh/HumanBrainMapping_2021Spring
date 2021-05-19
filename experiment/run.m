@@ -20,7 +20,7 @@ anchor_lms = screen_param.line_parameters.anchor_lms;
 bgcolor = screen_param.color_values.bgcolor;
 orange = screen_param.color_values.orange;
 red = screen_param.color_values.red;
-white = screen_param.color_values.white;  
+white = screen_param.color_values.white;
 
 if numel(expt_param.heat_intensity_table) == 3
     HighPain = max(expt_param.heat_intensity_table);
@@ -31,7 +31,7 @@ else
 end
 
 cue_types = expt_param.cue_types;
-run_type = expt_param.run_type;
+%run_type = expt_param.run_type;
 
 condition_nums = expt_param.condition_nums;
 trial_nums_per_condition = expt_param.trial_nums_per_condition;
@@ -157,14 +157,14 @@ end
 % Low_Certainty = [repmat(cue_types(1),1,2) repmat(cue_types(2),1,8)];
 
 condition_list = ["High_Certainty" "Middle_Certainty" "Low_Certainty"];
-switch run_type
-    case 'Plus_High_Certainty'
-        condition_list = [condition_list "High_Certainty"];
-    case 'Plus_Middle_Certainty'
-        condition_list = [condition_list "Middle_Certainty"];
-    case 'Plus_Low_Certainty'
-        condition_list = [condition_list "Low_Certainty"];
-end
+% switch run_type
+%     case 'Plus_High_Certainty'
+%         condition_list = [condition_list "High_Certainty"];
+%     case 'Plus_Middle_Certainty'
+%         condition_list = [condition_list "Middle_Certainty"];
+%     case 'Plus_Low_Certainty'
+%         condition_list = [condition_list "Low_Certainty"];
+% end
 
 % shuffle condition order
 rng('shuffle')
@@ -313,20 +313,7 @@ for trial_num = 1:trial_nums
     data = trial_heat(screen_param, expt_param, trial_num, data, heat_param(trial_num), shuffled_cue_list(trial_num));
 end
     
-
-
-
-% elseif strcmp(expt_param.run_type, 'movie_heat') % Movie heat Run
-%     for Trial_num = 1:expt_param.Trial_nums % movie -> no_movie -> movie -> no_movie ... sequence
-%         if strcmp(shuffled_type_list(Trial_num),'movie')
-%             [data, ckpt] = MPC_trial_movie_heat(screen_param, expt_param, Trial_num, data, ckpt, heat_param(Trial_num));
-%         else
-%             [data, ckpt] = MPC_trial_heat(screen_param, expt_param, Trial_num, data, ckpt, heat_param(Trial_num));
-%         end
-%     end
-% elseif strcmp(expt_param.run_type, 'caps') % CAPS Run
-%     data = MPC_trial_caps(screen_param, expt_param, data);
-%     
+     
 % else % Resting Run
 %     data = MPC_trial_resting(screen_param, expt_param, data);
 % end

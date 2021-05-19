@@ -20,7 +20,7 @@ global fontsize;
 
 Screen(theWindow,'FillRect',bgcolor, window_rect);
 
-msg=double('ÀÌµ¿ÇÑ ¿­ÆĞµå¸¦ È®ÀÎÀ» À§ÇÑ Å×½ºÆ®¸¦ ÁøÇàÇÏ°Ú½À´Ï´Ù (space)');
+msg=double('ì´ë™í•œ ì—´íŒ¨ë“œë¥¼ í™•ì¸ì„ ìœ„í•œ í…ŒìŠ¤íŠ¸ë¥¼ ì§„í–‰í•˜ê² ìŠµë‹ˆë‹¤ (space)');
 display_expmessage(msg);
 
 while (1)
@@ -37,7 +37,7 @@ Screen('Flip', theWindow);
 switch type
     case 'basic'
         for i = 1:4
-            msg = strcat('¿¬±¸ÀÚ´Â ¿­ÆĞµå¸¦ ÇØ´ç À§Ä¡·Î ÀÌµ¿½ÃÄÑÁÖ¼¼¿ä (Space):  ', num2str(i));
+            msg = strcat('ì—°êµ¬ìëŠ” ì—´íŒ¨ë“œë¥¼ í•´ë‹¹ ìœ„ì¹˜ë¡œ ì´ë™ì‹œì¼œì£¼ì„¸ìš” (Space):  ', num2str(i));
             while (1)
                 [~,~,keyCode] = KbCheck;
                 if keyCode(KbName('space'))==1
@@ -47,7 +47,7 @@ switch type
                 end
                 display_expmessage(msg);
             end
-            msg='Àá½Ã¸¸ ±â´Ù·Á ÁÖ¼¼¿ä';
+            msg='ì ì‹œë§Œ ê¸°ë‹¤ë ¤ ì£¼ì„¸ìš”';
             display_expmessage(msg);
             
             if ~isempty(msg)
@@ -74,7 +74,7 @@ switch type
                 % pause
             end
         end
-        msg=double('ÀÌÁ¦ºÎÅÍ Á¶ÀÌ½ºÆ½ ¿¬½ÀÀ» ½ÃÀÛÇÏ°Ú½À´Ï´Ù (space)');
+        msg=double('ì´ì œë¶€í„° ì¡°ì´ìŠ¤í‹± ì—°ìŠµì„ ì‹œì‘í•˜ê² ìŠµë‹ˆë‹¤ (space)');
         
     case 'MRI'
         if ~isempty(msg)
@@ -87,7 +87,7 @@ switch type
                     % do nothing
                 end
             end
-            msg='Àá½Ã¸¸ ±â´Ù·Á ÁÖ¼¼¿ä';
+            msg='ì ì‹œë§Œ ê¸°ë‹¤ë ¤ ì£¼ì„¸ìš”';
             display_expmessage(msg);
 
             main(ip, port, 1, degree);
@@ -112,7 +112,7 @@ switch type
         while GetSecs - sTime <14.5 
             % pause
         end
-        msg=double('È®ÀÎÇÏ¿´½À´Ï´Ù.\n´ÙÀ½À¸·Î´Â Ã´µµ È®ÀÎÀ» ÇÏ°Ú½À´Ï´Ù (space)');
+        msg=double('í™•ì¸í•˜ì˜€ìŠµë‹ˆë‹¤.\në‹¤ìŒìœ¼ë¡œëŠ” ì²™ë„ í™•ì¸ì„ í•˜ê² ìŠµë‹ˆë‹¤ (space)');
 end
 
 while (1)

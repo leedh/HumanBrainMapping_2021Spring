@@ -21,11 +21,15 @@ function cali_regression (degree, rating, th, NumOfTr)
 % see also glmfit % glmval %
 % LinearModel.Residuals.Raw: sum of squared errors polyfit: in a
 % least-squares sense % polyval
+%
+% Edited by Dong Hee Lee, May 2021
+%
 
 %% SETUP: variable
 global reg;
-std_rating=[30 50 70]; % low, mid, and high %from L. Atlas et al. (2010)
-final_rating=[30 40 50 60 70];
+% std_rating=[30 50 70]; % low, mid, and high %from L. Atlas et al. (2010)
+std_rating=[6 17 34.7 52.5]; % weak, moderate, strong from Bartoshuk et al. 2004; gLMS
+final_rating=[1.4 6 17 34.7 52.5]; % from Bartoshuk et al. 2004; gLMS
 
 %% SETUP: Correting input data 
 % For example, a boundary score of semi-sircular rating is between 0 to 100

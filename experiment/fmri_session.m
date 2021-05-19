@@ -28,6 +28,8 @@ load(fname);
 % --
 whichScreen = 1; % you can check the screen number by running Screen('Screens')
 
+expt_param.max_heat = 0;
+
 expt_param.cue_types = ["HighCue", "LowCue"];
 expt_param.cue_shapes = ["△", "☐"];
 

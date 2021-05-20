@@ -189,13 +189,13 @@ for i=1:condition_nums
                 else
                     rng('shuffle')
                     prob=rand();
-                    if prob >= 0.2 % match 80%
+                    if prob >= 0.1 % match 90%
                         if heat_program_condition(j) == HighPain
                             cue_list_condition(j) = "HighCue";
                         else
                             cue_list_condition(j) = "LowCue";
                         end
-                    else % mismatch 20%
+                    else % mismatch 10%
                         if heat_program_condition(j) == HighPain
                             cue_list_condition(j) = "LowCue";
                         else
@@ -237,13 +237,13 @@ for i=1:condition_nums
                 else
                     rng('shuffle')
                     prob=rand();
-                    if prob >= 0.8 % match 20%
+                    if prob >= 0.9 % match 10%
                         if heat_program_condition(j) == HighPain
                             cue_list_condition(j) = "HighCue";
                         else
                             cue_list_condition(j) = "LowCue";
                         end
-                    else % mismatch 80%
+                    else % mismatch 90%
                         if heat_program_condition(j) == HighPain
                             cue_list_condition(j) = "LowCue";
                         else

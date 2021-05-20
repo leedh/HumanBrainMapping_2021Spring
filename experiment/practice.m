@@ -1,6 +1,4 @@
 function practice(screen_param, expt_param)     
-global ip port
-
 %% Assign variables
 font = screen_param.window_info.font ;
 fontsize = screen_param.window_info.fontsize;
@@ -32,6 +30,10 @@ SetMouse(x,y)
 
 
 %% Assign variables 2
+% ip and port
+ip = expt_param.ip;
+port = expt_param.port;
+
 % Keyboard input setting
 if expt_param.dofmri
     device(1).product = 'Apple Keyboard';

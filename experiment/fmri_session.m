@@ -55,8 +55,8 @@ expt_param.trial_nums = expt_param.condition_nums * expt_param.trial_nums_per_co
 % {'no_movie_heat', 'movie_heat', 'caps', 'resting'}
 
 % pathway computer IP and port
-ip = '192.168.0.2';
-port = 20121;
+expt_param.ip = '192.168.0.2';
+expt_param.port = 20121;
 
 %% Start experiment
 data = data_save(expt_param, basedir);

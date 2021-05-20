@@ -8,10 +8,10 @@ function [cali_param]= data_save_cali(cali_param, basedir)
     else
 
     nowtime = clock;
-    %SubjDate = sprintf('%.2d%.2d%.2d', nowtime(1), nowtime(2), nowtime(3));
+    SubjDate = sprintf('%.2d%.2d%.2d', nowtime(1), nowtime(2), nowtime(3));
 
     %cali_param.datafile = fullfile(savedir, [SubjDate, '_', cali_param.subject, '_HBM', '.mat']);
-    cali_param.datafile = fullfile(savedir, [cali, '_', cali_param.subjectID, '_HBM', '.mat']);
+    cali_param.datafile = fullfile(savedir, [SubjDate, '_', cali_param.subjectID, '_cali', '_HBM', '.mat']);
     cali_param.version = 'HBM-05-11-2021';  % month-date-year
     cali_param.starttime = datestr(clock, 0);
     cali_param.cali_start_time = GetSecs; 

@@ -33,6 +33,8 @@ end
 cue_types = expt_param.cue_types;
 %run_type = expt_param.run_type;
 
+condition_list = expt_param.condition_list;
+
 condition_nums = expt_param.condition_nums;
 trial_nums_per_condition = expt_param.trial_nums_per_condition;
 trial_nums = condition_nums * trial_nums_per_condition;
@@ -156,7 +158,7 @@ end
 % Middle_Certainty = [repmat(cue_types(1),1,5) repmat(cue_types(2),1,5)];
 % Low_Certainty = [repmat(cue_types(1),1,2) repmat(cue_types(2),1,8)];
 
-condition_list = ["High_Certainty" "Middle_Certainty" "Low_Certainty"];
+% condition_list = ["High_Certainty" "Middle_Certainty" "Low_Certainty"];
 % switch run_type
 %     case 'Plus_High_Certainty'
 %         condition_list = [condition_list "High_Certainty"];
@@ -167,10 +169,10 @@ condition_list = ["High_Certainty" "Middle_Certainty" "Low_Certainty"];
 % end
 
 % shuffle condition order
-rng('shuffle')
-arr = 1:condition_nums;
-sample_index = datasample(arr, length(arr), 'Replace',false);
-condition_list = condition_list(sample_index);
+% rng('shuffle')
+% arr = 1:condition_nums;
+% sample_index = datasample(arr, length(arr), 'Replace',false);
+% condition_list = condition_list(sample_index);
 
 
 

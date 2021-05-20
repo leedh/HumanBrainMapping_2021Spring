@@ -13,8 +13,8 @@ function screen_param = setscreen(expt_param)
             fontsize = 32;
             HideCursor;
         case 'Test'
-            window_rect = [0 0 600 300];  % 1920 1080; full screen for window
-            fontsize = 20;
+            window_rect = [0 0 window_info.width/2 window_info.height/2];  % 1920 1080; full screen for window
+            fontsize = 25;
     end
     
     % size

@@ -28,7 +28,7 @@ function cali_regression (degree, rating, th, NumOfTr)
 %% SETUP: variable
 global reg;
 % std_rating=[30 50 70]; % low, mid, and high %from L. Atlas et al. (2010)
-std_rating=[6 17 34.7 52.5]; % weak, moderate, strong from Bartoshuk et al. 2004; gLMS
+%std_rating=[6 17 34.7]; % weak, moderate, strong from Bartoshuk et al. 2004; gLMS
 final_rating=[1.4 6 17 34.7 52.5]; % from Bartoshuk et al. 2004; gLMS
 
 %% SETUP: Correting input data 

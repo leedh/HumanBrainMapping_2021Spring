@@ -8,10 +8,10 @@ function [data]= data_save(expt_param, basedir)
     SubjDate = sprintf('%.2d%.2d%.2d', nowtime(1), nowtime(2), nowtime(3));
 
     data.run_name = expt_param.run_name;
-    data.datafile = fullfile(savedir, [SubjDate, '_', sprintf('%.3d', expt_param.run_num), '_', expt_param.run_name, '_HBM', '.mat']);
+    data.datafile = fullfile(savedir, [SubjDate, '_', expt_param.subjectID, '_', expt_param.run_name, sprintf('%.3d', expt_param.run_num), '_HBM', '.mat']);
     data.version = 'HBM-05-11-2021';  % month-date-year
     data.starttime = datestr(clock, 0);
-    data.dat.experiment_start_time = GetSecs; 
+    data.dat.experiment_start_time = GetSecs;
     
     % if the same file exists, break and retype subject info
     if exist(data.datafile, 'file')

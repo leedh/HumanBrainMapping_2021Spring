@@ -43,16 +43,16 @@ end
 
 %% Wait secs parameters
 first_jitter = [1,2,3];
-second_jitter = [3,2,1];
+second_jitter = [6,5,4];
 iti = 2;
 
 wait_after_iti = iti; % iti: 2 sec
 wait_after_first_jitter = first_jitter(jitter_index); % 1st jitter: 1,2,3 sec
 wait_after_belief_rating = wait_after_first_jitter + 4.5; % belief rating: 4.5 sec
 wait_after_cue = wait_after_belief_rating + 2; % cue: 2 sec
-wait_after_stimulus = wait_after_cue + 8; % stimulus: 8 sec
-wait_after_jitter = wait_after_stimulus + second_jitter(jitter_index); % 2nd jitter: 1,2,3, sec
-wait_after_heat_rating = wait_after_jitter + 4.5; % heat rating: 4.5 sec
+wait_after_second_jitter = wait_after_cue + second_jitter(jitter_index); % 2nd jitter: 4,5,6 sec
+wait_after_stimulus = wait_after_second_jitter + 8; % stimulus: 8 sec
+wait_after_heat_rating = wait_after_stimulus + 4.5; % heat rating: 4.5 sec
 total_trial_time = wait_after_heat_rating + 3;
 
 
@@ -76,7 +76,7 @@ data.dat.jitter_value = {first_jitter second_jitter};
 data.dat.iti_value = iti;
 data.dat.jitter_index(trial_num) = jitter_index;
 
-%% (1) Jittering
+%% (1) First Jittering
 %all_start_t = GetSecs; 
 
 Screen(theWindow, 'FillRect', bgcolor, window_rect);
@@ -145,7 +145,7 @@ while true
         abort_experiment('manual');
         break
     end
-    if GetSecs - data.dat.belief_rating_starttime(trial_num) > 5
+    if GetSecs - data.dat.belief_rating_starttime(trial_num) > 4.5
         break
     end
 end
@@ -197,8 +197,21 @@ waitsec_fromstarttime(data.dat.trial_starttime(trial_num), wait_after_cue)
 end_t = GetSecs;
 data.dat.cue_duration(trial_num) = end_t - start_t;
 
+%% (4) Second Jittering
+Screen(theWindow, 'FillRect', bgcolor, window_rect);
+Screen('TextSize', theWindow, 60);
+DrawFormattedText(theWindow, double('+'), 'center', 'center', white, [], [], [], 1.2);
+Screen('Flip', theWindow);
+Screen('TextSize', theWindow, fontsize);
 
-%% (4) Heat stimulus
+waitsec_fromstarttime(data.dat.trial_starttime(trial_num), wait_after_second_jitter)
+
+Screen(theWindow, 'FillRect', bgcolor, window_rect);
+Screen('Flip', theWindow);
+
+
+
+%% (5) Heat stimulus
 % Heat pain stimulus
 if ~expt_param.pathway
     Screen(theWindow, 'FillRect', bgcolor, window_rect);
@@ -206,7 +219,7 @@ if ~expt_param.pathway
     Screen('Flip', theWindow);
 end
 
-%% ------------- start to trigger thermal stimulus------------------
+% ------------- start to trigger thermal stimulus------------------
 if expt_param.pathway
     Screen(theWindow, 'FillRect', bgcolor, window_rect);
     Screen('TextSize', theWindow, 60);
@@ -216,28 +229,15 @@ if expt_param.pathway
     main(ip,port,2);
 end
 
-%% Check stimulus time
+% Check stimulus time
 data.dat.stimulus_time(trial_num) = GetSecs;
 
 
-%% stimulus time adjusting
+% stimulus time adjusting
 waitsec_fromstarttime(data.dat.trial_starttime(trial_num), wait_after_stimulus)
 
 
-%% Jittering
-% Screen(theWindow, 'FillRect', bgcolor, window_rect);
-% Screen('TextSize', theWindow, 60);
-% DrawFormattedText(theWindow, double('+'), 'center', 'center', white, [], [], [], 1.2);
-% Screen('Flip', theWindow);
-% Screen('TextSize', theWindow, fontsize);
-% 
-% waitsec_fromstarttime(data.dat.trial_starttime(trial_num), wait_after_jitter)
-% 
-% Screen(theWindow, 'FillRect', bgcolor, window_rect);
-% Screen('Flip', theWindow);
-% 
-
-%% (5) Heat Rating
+%% (6) Heat Rating
 % Setting for rating
 rating_types_pls = call_ratingtypes_pls('temp');
 
@@ -281,7 +281,7 @@ while true
         abort_experiment('manual');
         break
     end
-    if GetSecs - data.dat.heat_rating_starttime(trial_num) > 5
+    if GetSecs - data.dat.heat_rating_starttime(trial_num) > 4.5
         break
     end
 end

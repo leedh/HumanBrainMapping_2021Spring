@@ -73,7 +73,7 @@ if expt_param.max_heat
     % Making pathway program list
     PathPrg = load_PathProgram('HBM2021');
 
-    MaxHeat.program = PathPrg{45,4}; % 48 degree [48 '01000110' 'MPC_48' 70]
+    MaxHeat.program = PathPrg{46,4}; % 48 degree [48 '01000110' 'HBM_48' 70]
     MaxHeat.intensity = 48;
 
 

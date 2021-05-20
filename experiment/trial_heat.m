@@ -85,6 +85,11 @@ DrawFormattedText(theWindow, double('+'), 'center', 'center', white, [], [], [],
 Screen('Flip', theWindow);
 Screen('TextSize', theWindow, fontsize);
 
+% -------------Setting Pathway------------------
+if expt_param.pathway
+    main(ip,port,1, heat_param.program);     % select the program
+end
+
 waitsec_fromstarttime(data.dat.trial_starttime(trial_num), wait_after_first_jitter)
 
 Screen(theWindow, 'FillRect', bgcolor, window_rect);
@@ -155,9 +160,9 @@ data.dat.belief_rating_duration(trial_num) = end_t - start_t;
 Screen(theWindow, 'FillRect', bgcolor, window_rect);
 Screen('Flip', theWindow);
 
-% -------------Setting Pathway------------------
+% -------------Ready for Pathway------------------
 if expt_param.pathway
-    main(ip,port,1, heat_param.program);     % select the program
+    main(ip,port,2); %ready to pre-start
 end
 
 % belief rating time adjusting
@@ -184,10 +189,6 @@ switch shuffled_cue
 end
 
 
-% -------------Ready for Pathway------------------
-if expt_param.pathway
-    main(ip,port,2); %ready to pre-start
-end
 
 % belief rating time adjusting
 waitsec_fromstarttime(data.dat.trial_starttime(trial_num), wait_after_cue)

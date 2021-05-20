@@ -155,6 +155,11 @@ data.dat.belief_rating_duration(trial_num) = end_t - start_t;
 Screen(theWindow, 'FillRect', bgcolor, window_rect);
 Screen('Flip', theWindow);
 
+% -------------Setting Pathway------------------
+if expt_param.pathway
+    main(ip,port,1, heat_param.program);     % select the program
+end
+
 % belief rating time adjusting
 waitsec_fromstarttime(data.dat.trial_starttime(trial_num), wait_after_belief_rating)
 
@@ -178,6 +183,12 @@ switch shuffled_cue
         Screen('TextSize', theWindow, fontsize);
 end
 
+
+% -------------Ready for Pathway------------------
+if expt_param.pathway
+    main(ip,port,2); %ready to pre-start
+end
+
 % belief rating time adjusting
 waitsec_fromstarttime(data.dat.trial_starttime(trial_num), wait_after_cue)
 
@@ -186,22 +197,8 @@ end_t = GetSecs;
 data.dat.cue_duration(trial_num) = end_t - start_t;
 
 
-
-
 %% (4) Heat stimulus
-% -------------Setting Pathway------------------
-if expt_param.pathway
-    main(ip,port,1, heat_param.program);     % select the program
-end
-waitsec_fromstarttime(data.dat.trial_starttime(trial_num), wait_after_cue-2) 
-
-%% -------------Ready for Pathway------------------
-if expt_param.pathway
-    main(ip,port,2); %ready to pre-start
-end
-waitsec_fromstarttime(data.dat.trial_starttime(trial_num), wait_after_cue) % Because of wait_pathway_setup-2, this will be 2 seconds
-
-%% Heat pain stimulus
+% Heat pain stimulus
 if ~expt_param.pathway
     Screen(theWindow, 'FillRect', bgcolor, window_rect);
     DrawFormattedText(theWindow, double(num2str(heat_param.intensity)), 'center', 'center', white, [], [], [], 1.2);

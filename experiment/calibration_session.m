@@ -13,13 +13,19 @@ addpath(genpath(pwd));
 % UTP calbe)
 
 % should put the PC A's IP and port
-ip = '192.168.0.3'; %ip = '115.145.189.133'; %ip = '203.252.54.21';
+ip = '192.168.0.2'; %ip = '115.145.189.133'; %ip = '203.252.54.21';
 port = 20121;
 
-cali_param.screen_mode = 'Full'; %{'Test','Full'}
+basedir=pwd;
+
+cali_param.screen_mode = 'Test'; %{'Test','Full'}
 cali_param.pathway = 0;
-screen_param = setscreen(cali_param);
+
+cali_param.subject = 'test02'; %subject ID 
 
 %% Calibration
-SID = 'test02'; %subject ID 
-calibration(SID, ip, port, cali_param, screen_param); % run calibration task 
+cali_param = data_save_cali(cali_param, basedir);
+
+screen_param = setscreen(cali_param);
+
+calibration(ip, port, cali_param, screen_param); % run calibration task 

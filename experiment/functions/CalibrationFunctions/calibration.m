@@ -1,4 +1,4 @@
-function calibration(SID, ip, port, cali_param, screen_param)
+function calibration(ip, port, cali_param, screen_param)
 % Calibration function
 % dependent function: cali_regression.m
 %% Assign variables
@@ -38,35 +38,35 @@ if strcmp(cali_param.screen_mode,'Test')
 end
 
 %% SETUP: DATA and Subject INFO
-savedir = fullfile(pwd,'Data/calibration');
-fname = fullfile(savedir,['cali_' SID '.mat']);
-% What to do if the file exits?
-if ~exist(savedir, 'dir')
-    mkdir(savedir);
-    whattodo = 1;
-else
-    if exist(fname, 'file')
-        str = ['The Subject ' SID ' data file exists. Press a button for the following options'];
-        disp(str);
-        whattodo = input('1:Save new file, 2:Save the data from where we left off, Ctrl+C:Abort? ');
-    else
-        whattodo = 1;        
-    end
-end
-
-if whattodo == 2
-    load(fname);
-    start_trial = numel(reg.stim_degree) + 1;
-else
-    start_trial = 1;
-end
+% savedir = fullfile(pwd,'Data/calibration');
+% fname = fullfile(savedir,['cali_' SID '.mat']);
+% % What to do if the file exits?
+% if ~exist(savedir, 'dir')
+%     mkdir(savedir);
+%     whattodo = 1;
+% else
+%     if exist(fname, 'file')
+%         str = ['The Subject ' SID ' data file exists. Press a button for the following options'];
+%         disp(str);
+%         whattodo = input('1:Save new file, 2:Save the data from where we left off, Ctrl+C:Abort? ');
+%     else
+%         whattodo = 1;        
+%     end
+% end
+% 
+% if whattodo == 2
+%     load(fname);
+%     start_trial = numel(reg.stim_degree) + 1;
+% else
+%     start_trial = 1;
+% end
 
 
 % [fname, start_trial , SID] = subjectinfo_check_SEMIC(SID, savedir,1,'Cali'); % subfunction %start_trial
 % save data using the canlab_dataset object
 reg.version = 'SEMIC_Calibration_v1_01-03-2018_Cocoanlab';
-reg.subject = SID;
-reg.datafile = fname;
+reg.subject = cali_param.subject;
+reg.datafile = cali_param.datafile;
 reg.starttime = datestr(clock, 0); % date-time
 reg.starttime_getsecs = GetSecs; % in the same format of timestamps for each trial
 
@@ -80,6 +80,7 @@ site_n = 6;
 practice_n = 2; % number of rating practice trial
 trial_n = stim_n*site_n;
 
+start_trial = 1;
 
 % save?
 save(reg.datafile,'reg','init_stim');
@@ -234,7 +235,7 @@ try
                 abort_experiment('manual');
                 break
                 
-            elseif GetSecs - start_rating > 4.5
+            elseif GetSecs - start_rating > 5.5
                 break
                 
             end

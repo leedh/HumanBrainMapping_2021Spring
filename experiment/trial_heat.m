@@ -176,13 +176,13 @@ data.dat.cue_starttime(trial_num) = start_t;
 switch shuffled_cue
     case "HighCue"
         Screen(theWindow, 'FillRect', bgcolor, window_rect);
-        Screen('TextSize', theWindow, 60);
+        Screen('TextSize', theWindow, 120);
         DrawFormattedText(theWindow, double(char(expt_param.cue_shapes(1))), 'center', 'center', white, [], [], [], 1.2);
         Screen('Flip', theWindow);
         Screen('TextSize', theWindow, fontsize);
     case "LowCue"
         Screen(theWindow, 'FillRect', bgcolor, window_rect);
-        Screen('TextSize', theWindow, 60);
+        Screen('TextSize', theWindow, 120);
         DrawFormattedText(theWindow, double(char(expt_param.cue_shapes(2))), 'center', 'center', white, [], [], [], 1.2);
         Screen('Flip', theWindow);
         Screen('TextSize', theWindow, fontsize);

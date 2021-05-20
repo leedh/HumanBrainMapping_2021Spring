@@ -284,7 +284,7 @@ for i = 1:length(shuffled_heat_list)
 end
 
 data.dat.heat_param = heat_param;
-%data.dat.cue_list = shuffled_cue_list;
+data.dat.cue_list = shuffled_cue_list;
 
 %% Adjusting time from fmri started.
 Screen(theWindow, 'FillRect', bgcolor, window_rect);

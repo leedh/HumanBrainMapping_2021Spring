@@ -14,14 +14,14 @@ expt_param.screen_mode = 'Full'; %{'Test','Full'}
 expt_param.run_name = 'run';
 expt_param.run_num = 01;
 
-expt_param.pathway = false;
-expt_param.dofmri = false;
+expt_param.pathway = false; % {true, false}
+expt_param.dofmri = false; % {true, false}
 
 %% Experiment parameter
 expt_param.subjectID='test02'; %Subject ID
 
 loaddir = fullfile(pwd,'Data/calibration');
-fname = fullfile(loaddir,['cali_' expt_param.subjectID '.mat']);
+fname = fullfile(loaddir, [cali, '_', expt_param.subjectID, '_HBM', '.mat']);
 
 load(fname);
 

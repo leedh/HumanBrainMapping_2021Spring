@@ -21,7 +21,7 @@ basedir=pwd;
 cali_param.screen_mode = 'Test'; %{'Test','Full'}
 cali_param.pathway = 0;
 
-cali_param.subject = 'test02'; %subject ID 
+cali_param.subjectID = 'test02'; %subject ID 
 
 %% Calibration
 cali_param = data_save_cali(cali_param, basedir);

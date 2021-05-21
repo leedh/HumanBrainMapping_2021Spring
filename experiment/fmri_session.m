@@ -57,7 +57,7 @@ data.expt_param = expt_param;
 
 screen_param = setscreen(expt_param);
 
-explain(screen_param);
+explain_fmri(screen_param);
 
 practice(screen_param, expt_param);
 

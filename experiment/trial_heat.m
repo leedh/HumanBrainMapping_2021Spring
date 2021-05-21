@@ -44,9 +44,10 @@ end
 %% Wait secs parameters
 first_jitter = [3,4,5];
 second_jitter = [5,4,3];
-iti = 1;
+iti1 = 1;
+iti2 = 3;
 
-wait_after_iti = iti; % iti: 4 (1+3) sec
+wait_after_iti = iti1; % iti: 4 (1+3) sec
 wait_after_belief_rating = 4.5; % belief rating: 4.5 sec
 wait_after_first_jitter = wait_after_belief_rating + first_jitter(jitter_index); % 1st jitter: 3,4,5 sec
 wait_after_cue = wait_after_first_jitter + 2; % cue: 2 sec
@@ -54,7 +55,7 @@ wait_after_delay = wait_after_cue + 5; % delay: 5 sec
 wait_after_stimulus = wait_after_delay + 8; % stimulus: 8 sec
 wait_after_second_jitter = wait_after_stimulus + second_jitter(jitter_index); % 2nd jitter: 3,4,5 sec
 wait_after_heat_rating = wait_after_second_jitter + 4.5; % heat rating: 4.5 sec
-total_trial_time = wait_after_heat_rating + 3;
+total_trial_time = wait_after_heat_rating + iti2;
 
 
 %% Adjusting between trial time
@@ -74,7 +75,7 @@ data.dat.between_run_trial_starttime(trial_num) = data.dat.trial_starttime(trial
 Screen(theWindow, 'FillRect', bgcolor, window_rect);
 
 data.dat.jitter_value = {first_jitter second_jitter};
-data.dat.iti_value = iti;
+data.dat.iti_value = iti1 + iti2;
 data.dat.jitter_index(trial_num) = jitter_index;
 
 %% (1) Cue Belief rating
@@ -322,7 +323,7 @@ waitsec_fromstarttime(data.dat.trial_starttime(trial_num), total_trial_time)
 data.dat.trial_endtime(trial_num) = GetSecs;
 data.dat.trial_duration(trial_num) = data.dat.trial_endtime(trial_num) - data.dat.trial_starttime(trial_num);
 
-if trial_num >1
+if trial_num > 1
     data.dat.between_trial_time(trial_num) = data.dat.trial_starttime(trial_num) - data.dat.trial_endtime(trial_num-1);
 else
     data.dat.between_trial_time(trial_num) = 0;

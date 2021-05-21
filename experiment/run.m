@@ -40,12 +40,12 @@ trial_nums_per_condition = expt_param.trial_nums_per_condition;
 trial_nums = condition_nums * trial_nums_per_condition;
 midpain_per_condition = expt_param.midpain_per_condition;
 
-% Keyboard input setting
-if expt_param.dofmri
-    device(1).product = 'Apple Keyboard';
-    device(1).vendorID= 1452;
-    apple = IDkeyboards(device(1));
-end 
+% Keyboard input setting (for macOS)
+% if expt_param.dofmri
+%     device(1).product = 'Apple Keyboard';
+%     device(1).vendorID= 1452;
+%     apple = IDkeyboards(device(1));
+% end 
 
 %% Ready for start run
 while true
@@ -53,12 +53,14 @@ while true
     DrawFormattedText(theWindow, double(msgtxt), 'center', 'center', white, [], [], [], 2);
     Screen('Flip', theWindow);
     
-    if expt_param.dofmri
-        [~,~,keyCode] = KbCheck(apple);
-    else
-        [~,~,keyCode] = KbCheck(-1);
-    end
+    [~,~,keyCode] = KbCheck(-1);
     
+%     if expt_param.dofmri
+%         [~,~,keyCode] = KbCheck(apple);
+%     else
+%         [~,~,keyCode] = KbCheck(-1);
+%     end
+     
     if keyCode(KbName('a')) == 1
         break
     elseif keyCode(KbName('q')) == 1
@@ -68,12 +70,12 @@ while true
 end
 
 
-% ===== Scanner trigger setting
-if expt_param.dofmri
-    device(2).product = 'KeyWarrior8 Flex';
-    device(2).vendorID= 1984;
-    scanner = IDkeyboards(device(2));
-end
+% ===== Scanner trigger setting (for macOS)
+% if expt_param.dofmri
+%     device(2).product = 'KeyWarrior8 Flex';
+%     device(2).vendorID= 1984;
+%     scanner = IDkeyboards(device(2));
+% end
 
 %% Waitting for 's' or 't' key
 while true
@@ -81,18 +83,22 @@ while true
     DrawFormattedText(theWindow, double(msgtxt), 'center', 'center', white, [], [], [], 2);
     Screen('Flip', theWindow);
     
-    if expt_param.dofmri
-        [~,~,keyCode] = KbCheck(scanner);
-        [~,~,keyCode2] = KbCheck(apple);
-    else
-        [~,~,keyCode] = KbCheck;
-    end
+    [~,~,keyCode] = KbCheck(-1);
+    
+%     if expt_param.dofmri
+%         [~,~,keyCode] = KbCheck(scanner);
+%         [~,~,keyCode2] = KbCheck(apple);
+%     else
+%         [~,~,keyCode] = KbCheck;
+%     end
+
     % If it is for fMRI experiment, it will start with "s",
     % But if it is test time, it will start with "t" key.
     if expt_param.dofmri
         if keyCode(KbName('s'))==1
             break
-        elseif keyCode2(KbName('q'))==1
+        %elseif keyCode2(KbName('q'))==1
+        elseif keyCode(KbName('q'))==1
             abort_experiment;
         end
     else

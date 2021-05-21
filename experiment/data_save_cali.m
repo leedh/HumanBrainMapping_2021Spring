@@ -18,7 +18,7 @@ function [cali_param]= data_save_cali(cali_param, basedir)
     
     % if the same file exists, break and retype subject info
     if exist(cali_param.datafile, 'file')
-        fprintf('\n ** EXSITING FILE: %s %s **', cali_param.subject, SubjDate);
+        fprintf('\n ** EXSITING FILE: %s %s **', cali_param.subjectID, SubjDate);
         cont_or_not = input(['\nThe typed subject are already saved.', ...
             '\nWill you go on with the subject file that saved before?', ...
             '\n1: Yes, continue with new file.  ,   2: No, it`s a mistake. I`ll break.\n:  ']);

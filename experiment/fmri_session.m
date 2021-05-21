@@ -19,14 +19,15 @@ condition_list = shuffled_condition(1); % shuffled_condition(1)~(6)
 
 
 %% Experiment parameter(1)
-expt_param.subjectID='test03'; %Subject ID
+expt_param.subjectID='test02'; %Subject ID
+expt_param.cali_date='20210520'; %YYYYMMDD
 
 LowPain = 41;
 MidPain = 44; 
 HighPain = 47;
 %% Pain intensity from calibration (only after calibration)
 loaddir = fullfile(basedir,'Data/calibration');
-fname = fullfile(loaddir, [cali, '_', expt_param.subjectID, '_HBM', '.mat']);
+fname = fullfile(loaddir, [expt_param.cali_date, '_', expt_param.subjectID, '_cali', '_HBM', '.mat']);
 load(fname);
 
 LowPain = reg.FinalLMH_5Level(2);

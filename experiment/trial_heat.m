@@ -1,6 +1,4 @@
 function data = trial_heat(screen_param, expt_param, trial_num, data, heat_param, shuffled_cue)
-global ip port;
-
 %% Assign variables
 font = screen_param.window_info.font ;
 fontsize = screen_param.window_info.fontsize;
@@ -23,6 +21,8 @@ orange = screen_param.color_values.orange;
 red = screen_param.color_values.red;
 white = screen_param.color_values.white;   
 
+ip = expt_param.ip;
+port = expt_param.port;
 
 %% Saving cue type 
 data.dat.cue_type(trial_num) = shuffled_cue;

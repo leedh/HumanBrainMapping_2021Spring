@@ -42,17 +42,18 @@ end
 
 
 %% Wait secs parameters
-first_jitter = [1,2,3];
-second_jitter = [6,5,4];
-iti = 2;
+first_jitter = [3,4,5];
+second_jitter = [5,4,3];
+iti = 1;
 
-wait_after_iti = iti; % iti: 2 sec
-wait_after_first_jitter = first_jitter(jitter_index); % 1st jitter: 1,2,3 sec
-wait_after_belief_rating = wait_after_first_jitter + 4.5; % belief rating: 4.5 sec
-wait_after_cue = wait_after_belief_rating + 2; % cue: 2 sec
-wait_after_second_jitter = wait_after_cue + second_jitter(jitter_index); % 2nd jitter: 4,5,6 sec
-wait_after_stimulus = wait_after_second_jitter + 8; % stimulus: 8 sec
-wait_after_heat_rating = wait_after_stimulus + 4.5; % heat rating: 4.5 sec
+wait_after_iti = iti; % iti: 4 (1+3) sec
+wait_after_belief_rating = 4.5; % belief rating: 4.5 sec
+wait_after_first_jitter = wait_after_belief_rating + first_jitter(jitter_index); % 1st jitter: 3,4,5 sec
+wait_after_cue = wait_after_first_jitter + 2; % cue: 2 sec
+wait_after_delay = wait_after_cue + 5; % delay: 5 sec
+wait_after_stimulus = wait_after_delay + 8; % stimulus: 8 sec
+wait_after_second_jitter = wait_after_stimulus + second_jitter(jitter_index); % 2nd jitter: 3,4,5 sec
+wait_after_heat_rating = wait_after_second_jitter + 4.5; % heat rating: 4.5 sec
 total_trial_time = wait_after_heat_rating + 3;
 
 
@@ -76,37 +77,15 @@ data.dat.jitter_value = {first_jitter second_jitter};
 data.dat.iti_value = iti;
 data.dat.jitter_index(trial_num) = jitter_index;
 
-%% (1) First Jittering
-%all_start_t = GetSecs; 
+%% (1) Cue Belief rating
+start_t = GetSecs;
+data.dat.belief_rating_starttime(trial_num) = start_t;
 
-Screen(theWindow, 'FillRect', bgcolor, window_rect);
-Screen('TextSize', theWindow, 60);
-DrawFormattedText(theWindow, double('+'), 'center', 'center', white, [], [], [], 1.2);
-Screen('Flip', theWindow);
-Screen('TextSize', theWindow, fontsize);
-
-% -------------Setting Pathway------------------
-if expt_param.pathway
-    main(ip,port,1, heat_param.program);     % select the program
-end
-
-waitsec_fromstarttime(data.dat.trial_starttime(trial_num), wait_after_first_jitter)
-
-Screen(theWindow, 'FillRect', bgcolor, window_rect);
-Screen('Flip', theWindow);
-
-
-
-
-%% (2) Cue belief rating
 rating_types_pls = call_ratingtypes_pls('belief');
 
 scale = ('belief_int');
 [lb, rb, start_center] = draw_scale_pls(scale, screen_param.window_info, screen_param.line_parameters, screen_param.color_values);
 Screen(theWindow, 'FillRect', bgcolor, window_rect);
-
-start_t = GetSecs;
-data.dat.belief_rating_starttime(trial_num) = start_t;
 
 ratetype = strcmp(rating_types_pls.alltypes, scale);
 
@@ -160,14 +139,30 @@ data.dat.belief_rating_duration(trial_num) = end_t - start_t;
 Screen(theWindow, 'FillRect', bgcolor, window_rect);
 Screen('Flip', theWindow);
 
+
+% -------------Setting Pathway------------------
+if expt_param.pathway
+    main(ip,port,1, heat_param.program);     % select the program
+end
+
+
+% belief rating time adjusting
+waitsec_fromstarttime(data.dat.trial_starttime(trial_num), wait_after_belief_rating)
+
+%% (2) First Jittering
+
+Screen(theWindow, 'FillRect', bgcolor, window_rect);
+Screen('TextSize', theWindow, 60);
+DrawFormattedText(theWindow, double('+'), 'center', 'center', white, [], [], [], 1.2);
+Screen('Flip', theWindow);
+Screen('TextSize', theWindow, fontsize);
+
 % -------------Ready for Pathway------------------
 if expt_param.pathway
     main(ip,port,2); %ready to pre-start
 end
 
-% belief rating time adjusting
-waitsec_fromstarttime(data.dat.trial_starttime(trial_num), wait_after_belief_rating)
-
+waitsec_fromstarttime(data.dat.trial_starttime(trial_num), wait_after_first_jitter)
 
 %% (3) Cue
 start_t = GetSecs;
@@ -189,7 +184,6 @@ switch shuffled_cue
 end
 
 
-
 % belief rating time adjusting
 waitsec_fromstarttime(data.dat.trial_starttime(trial_num), wait_after_cue)
 
@@ -197,18 +191,22 @@ waitsec_fromstarttime(data.dat.trial_starttime(trial_num), wait_after_cue)
 end_t = GetSecs;
 data.dat.cue_duration(trial_num) = end_t - start_t;
 
-%% (4) Second Jittering
+%% (4)Delay
+start_t = GetSecs;
+data.dat.delay_starttime(trial_num) = start_t;
+
 Screen(theWindow, 'FillRect', bgcolor, window_rect);
 Screen('TextSize', theWindow, 60);
 DrawFormattedText(theWindow, double('+'), 'center', 'center', white, [], [], [], 1.2);
 Screen('Flip', theWindow);
 Screen('TextSize', theWindow, fontsize);
 
-waitsec_fromstarttime(data.dat.trial_starttime(trial_num), wait_after_second_jitter)
+% delay time adjusting
+waitsec_fromstarttime(data.dat.trial_starttime(trial_num), wait_after_delay)
 
-Screen(theWindow, 'FillRect', bgcolor, window_rect);
-Screen('Flip', theWindow);
-
+% saving rating result
+end_t = GetSecs;
+data.dat.delay_duration(trial_num) = end_t - start_t;
 
 
 %% (5) Heat stimulus
@@ -235,6 +233,18 @@ data.dat.stimulus_time(trial_num) = GetSecs;
 
 % stimulus time adjusting
 waitsec_fromstarttime(data.dat.trial_starttime(trial_num), wait_after_stimulus)
+
+%% (5) Second Jittering
+Screen(theWindow, 'FillRect', bgcolor, window_rect);
+Screen('TextSize', theWindow, 60);
+DrawFormattedText(theWindow, double('+'), 'center', 'center', white, [], [], [], 1.2);
+Screen('Flip', theWindow);
+Screen('TextSize', theWindow, fontsize);
+
+waitsec_fromstarttime(data.dat.trial_starttime(trial_num), wait_after_second_jitter)
+
+Screen(theWindow, 'FillRect', bgcolor, window_rect);
+Screen('Flip', theWindow);
 
 
 %% (6) Heat Rating

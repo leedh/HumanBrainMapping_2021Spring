@@ -9,7 +9,7 @@ addpath(genpath(pwd));
 
 basedir = pwd;
 
-expt_param.screen_mode = 'Full'; %{'Test','Full'}
+expt_param.screen_mode = 'Test'; %{'Test','Full'}
 
 % change arguments below when a run finished
 expt_param.run_name = 'run';
@@ -19,7 +19,7 @@ condition_list = shuffled_condition(1); % shuffled_condition(1)~(6)
 
 
 %% Experiment parameter(1)
-expt_param.subjectID='test02'; %Subject ID
+expt_param.subjectID='test03'; %Subject ID
 
 LowPain = 41;
 MidPain = 44; 
@@ -43,7 +43,7 @@ expt_param.condition_list = condition_list;
 
 expt_param.heat_intensity_table = [LowPain, MidPain, HighPain]; % stimulus intensity
 
-expt_param.condition_nums = 3;
+expt_param.condition_nums = 2;
 expt_param.trial_nums_per_condition = 10;
 expt_param.midpain_per_condition = 2;
 expt_param.trial_nums = expt_param.condition_nums * expt_param.trial_nums_per_condition;
@@ -58,7 +58,7 @@ data.expt_param = expt_param;
 screen_param = setscreen(expt_param);
 
 explain(screen_param);
-  
+
 practice(screen_param, expt_param);
 
 data = run(screen_param, expt_param, data);

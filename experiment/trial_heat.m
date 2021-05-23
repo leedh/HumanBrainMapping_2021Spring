@@ -250,11 +250,11 @@ Screen('Flip', theWindow);
 
 %% (6) Heat Rating
 % Setting for rating
-rating_types_pls = call_ratingtypes_pls('temp');
+rating_types_pls = call_ratingtypes_pls('temp_vas');
 
 %all_start_t = GetSecs;
 
-scale = ('overall_int');
+scale = ('overall_int_vas');
 [lb, rb, start_center] = draw_scale_pls(scale, screen_param.window_info, screen_param.line_parameters, screen_param.color_values);
 Screen(theWindow, 'FillRect', bgcolor, window_rect);
 

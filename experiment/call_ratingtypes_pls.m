@@ -23,6 +23,17 @@ switch type
         rating_types_pls.postallstims = {'REST'};
         rating_types_pls.postalltypes{1} = ...
             {'overall_int'};
+    case 'temp_vas'
+        temp_rating_types_pls = {
+            'overall_int_vas', '통증이 얼마나 강했나요?';...
+            };
+        
+        rating_types_pls.alltypes = temp_rating_types_pls(:,1);
+        rating_types_pls.prompts = temp_rating_types_pls(:,2);
+        
+        rating_types_pls.postallstims = {'REST'};
+        rating_types_pls.postalltypes{1} = ...
+            {'overall_int_vas'};
     case 'belief'
         temp_rating_types_pls = {
             'belief_int', '아래의 관계를 얼마나 신뢰하시나요?';...

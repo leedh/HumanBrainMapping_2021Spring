@@ -14,6 +14,10 @@ function condition_list = shuffled_condition(i)
         condition_list = ["Middle_Certainty" "Low_Certainty"];
     elseif i==6
         condition_list = ["Middle_Certainty" "High_Certainty"];
+    elseif i==7
+        condition_list = ["Low_Certainty" "Low_Certainty"];
+    elseif i==8
+        condition_list = ["High_Certainty" "High_Certainty"];
     end
 
 end

@@ -74,7 +74,8 @@ switch scale
         Screen('DrawLine', theWindow, white, lb, H*(1/2), rb, H*(1/2), 4); % penWidth: 0.125~7.000
         Screen('DrawLine', theWindow, white, lb, H*(1/2)-scale_H/3, lb, H*(1/2)+scale_H/3, 6);
 %         DrawFormattedText(theWindow, double('전혀 느껴지지\n      않음'), lb-scale_H/0.8, H*(1/2)+scale_H/1.2, white,[],[],[],1.2);
-        DrawFormattedText(theWindow, double('0'), H*(1/2)-scale_H/3, H*(1/2)+scale_H/0.8, white,[],[],[],1.2);
+        %DrawFormattedText(theWindow, double('0'), H*(1/2)-scale_H/3, H*(1/2)+scale_H/0.8, white,[],[],[],1.2);
+        DrawFormattedText(theWindow, double('0'), lb-scale_H/2, H*(1/2)+scale_H/1.2, white,[],[],[],1.2);
         
         Screen('DrawLine', theWindow, white, lb+bar_space*0.5, H*(1/2)-scale_H/3, lb+bar_space*0.5, H*(1/2)+scale_H/3, 6); % score 5 bar
         Screen('DrawLine', theWindow, white, lb+bar_space*0.1, H*(1/2)-scale_H/3, lb+bar_space*0.1, H*(1/2)+scale_H/3, 6);
@@ -88,7 +89,8 @@ switch scale
 
         Screen('DrawLine', theWindow, white, rb, H*(1/2)-scale_H/3, rb, H*(1/2)+scale_H/3, 6);
 %         DrawFormattedText(theWindow, double('상상할 수 있는\n가장 강한 통증'), rb-scale_H/0.7, H*(1/2)+scale_H/1.2, white,[],[],[],1.2);
-        DrawFormattedText(theWindow, double('10'), rb-scale_H/0.7, H*(1/2)+scale_H/0.8, white,[],[],[],1.2);
+        %DrawFormattedText(theWindow, double('10'), rb-scale_H/0.7, H*(1/2)+scale_H/0.8, white,[],[],[],1.2);
+        DrawFormattedText(theWindow, double('10'), rb-scale_H/2, H*(1/2)+scale_H/1.2, white,[],[],[],1.2);
 
     case 'resting_int'  % one-directional
         start_center = false;

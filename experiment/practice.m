@@ -26,31 +26,30 @@ Screen(theWindow, 'FillRect', bgcolor, window_rect);
 % one-directional
 x = W*(1/4);
 y = H*(1/2);
-SetMouse(x,y)  
-
+SetMouse(x,y)
 
 %% Assign variables 2
 % ip and port
 ip = expt_param.ip;
 port = expt_param.port;
 
-% Keyboard input setting
-if expt_param.dofmri
-    device(1).product = 'Apple Keyboard';
-    device(1).vendorID= 1452;
-    apple = IDkeyboards(device(1));
-end 
+% Keyboard input setting (for macOS)
+% if expt_param.dofmri
+%     device(1).product = 'Apple Keyboard';
+%     device(1).vendorID= 1452;
+%     apple = IDkeyboards(device(1));
+% end 
 
 %% Maximum temperature heat pain stimulus
 % Push the button to deliver heat stimulus
 
 if expt_param.max_heat
     while true
-        if expt_param.dofmri
-            [~,~,keyCode] = KbCheck(apple);
-        else
-            [~,~,keyCode] = KbCheck(-1);
-        end
+%         if expt_param.dofmri
+%             [~,~,keyCode] = KbCheck(apple);
+%         else
+        [~,~,keyCode] = KbCheck(-1);
+%         end
 
     %     if keyCode(KbName('q')) == 1
     %         abort_experiment('manual');
@@ -61,6 +60,7 @@ if expt_param.max_heat
         msgtxt = double(msgtxt); % korean to double
         DrawFormattedText(theWindow, msgtxt, 'center', 'center', white, [], [], [], 2);
         Screen('Flip', theWindow); 
+        
 
 
         if keyCode(KbName('m')) == 1

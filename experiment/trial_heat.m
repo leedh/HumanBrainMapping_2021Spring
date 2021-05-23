@@ -79,11 +79,6 @@ data.dat.iti_value = iti1 + iti2;
 data.dat.jitter_index(trial_num) = jitter_index;
 
 %% (1) Cue Belief rating
-% -------------Setting Pathway------------------
-if expt_param.pathway
-    main(ip,port,1, heat_param.program);     % select the program
-end
-
 start_t = GetSecs;
 data.dat.belief_rating_starttime(trial_num) = start_t;
 
@@ -156,6 +151,13 @@ Screen('TextSize', theWindow, 60);
 DrawFormattedText(theWindow, double('+'), 'center', 'center', white, [], [], [], 1.2);
 Screen('Flip', theWindow);
 Screen('TextSize', theWindow, fontsize);
+
+% -------------Setting Pathway------------------
+if expt_param.pathway
+    main(ip,port,1, heat_param.program);     % select the program
+end
+
+waitsec_fromstarttime(data.dat.trial_starttime(trial_num), wait_after_first_jitter-2)
 
 % -------------Ready for Pathway------------------
 if expt_param.pathway

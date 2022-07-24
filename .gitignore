@@ -3,3 +3,8 @@
 
 # OSX / *nix default autosave extension
 *.m~
+
+# behavioral & fMRI images
+data/
+result/
+images/*.img

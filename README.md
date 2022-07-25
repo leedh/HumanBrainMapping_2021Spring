@@ -1,4 +1,4 @@
-# HumanBrainMapping_2021Spring
+# Human Brain Mapping with fMRI / Spring 2021 
 
 Spring 2021 Semester
 
